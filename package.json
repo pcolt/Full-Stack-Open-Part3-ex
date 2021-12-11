@@ -4,6 +4,8 @@
   "description": "part3-a-nodeandexpress",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Pablo C",
@@ -11,5 +13,11 @@
   "bugs": {
     "url": "https://github.com/pcolt/Full-Stack-Open-Part3-ex/issues"
   },
-  "homepage": "https://github.com/pcolt/Full-Stack-Open-Part3-ex#readme"
+  "homepage": "https://github.com/pcolt/Full-Stack-Open-Part3-ex#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
 }
