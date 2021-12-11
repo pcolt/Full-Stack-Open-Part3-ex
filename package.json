@@ -1,0 +1,15 @@
+{
+  "name": "ls",
+  "version": "1.0.0",
+  "description": "part3-a-nodeandexpress",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Pablo C",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pcolt/Full-Stack-Open-Part3-ex/issues"
+  },
+  "homepage": "https://github.com/pcolt/Full-Stack-Open-Part3-ex#readme"
+}
