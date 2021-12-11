@@ -1,10 +1,16 @@
 //console.log('hello world')
 
+// Node + http
 const http = require('http')    // Node has still a different sintax from browser-side import of ES6 modules (i.e. import http from 'http')
+// Express
 const express = require('express')
+const { request } = require('express')
 const app = express()
+// express json-parser (a middleware)
+app.use(express.json())
 
-const notes = [
+
+let notes = [
 	{
 		id: 1,
 		content: 'HTML is esay (old)',
@@ -37,6 +43,16 @@ const notes = [
 // app.listen(PORT)
 // console.log(`Server running on port ${PORT}`)
 
+// Middleware are functions that can be used for handling request and response objects
+const requestLogger = (request, response, next) => {
+    console.log('Method:',request.method);
+    console.log('Path:',request.path);
+    console.log('Body:',request.body);
+    console.log('---');
+    next()
+}
+app.use(requestLogger)
+
 // a server using Express 
 app.get('/', (request, response) => {
     response.send('<h1>Hello world</h1>')
@@ -57,10 +73,52 @@ app.get('/api/notes/:id', (request, response) => {
         response.json(note)
     } else {
         response.statusMessage = "The note number searched was not found";
-        response.status(404).end()()
+        response.status(404).end()
     }
     
 })
+
+app.delete('/api/notes/:id', (request, response) => {
+    const id = Number(request.params.id)
+    notes = notes.filter(note => note.id !== id)
+    //console.log('notes:',notes);
+
+    response.status(204).end()
+})
+
+const generateId = () => {
+    const maxId = notes.length > 0 ? Math.max(...notes.map(n => n.id)) : 0
+    return maxId + 1
+}
+
+app.post('/api/notes', (request, response) => {
+    const body = request.body
+    //console.log('note:',note);
+
+    if (!body.content) {
+        return response.status(400).json({
+            error: 'content missing'
+        })
+    }
+
+    const note = {
+        content: body.content,
+        important: body.important || false,
+        date: new Date(),
+        id: generateId()
+    }
+
+    notes = notes.concat(note)
+    //console.log('notes:',notes);
+
+    response.json(note)
+})
+
+// another middleware after the routes that handle call to a different endpoint
+const unknownEndpoint = (request, response) => {
+    response.status(404).send({ error: 'unknown endpoint'})
+}
+app.use(unknownEndpoint)
 
 const PORT = 3001
 app.listen(PORT, () => {
