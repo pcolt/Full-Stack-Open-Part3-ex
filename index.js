@@ -8,6 +8,9 @@ const { request } = require('express')
 const app = express()
 // express json-parser (a middleware)
 app.use(express.json())
+// to allow cors requests from all origins (another middleware)
+const cors = require('cors')
+app.use(cors())
 
 
 let notes = [
