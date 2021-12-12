@@ -21,3 +21,12 @@ We can start our application with nodemon like this:
 `npm run dev`
 Changes to the application code now cause the server to restart automatically. 
 These development dependencies are not needed when the application is run in production mode on the production server (e.g. Heroku)
+
+To deploy on heroku run from the command line:
+`heroku login` 
+and then after have commited and pushed all the changes to the repository on github run:
+`git push heroku`.
+If any issue occurs print out the logs with:
+`heroku logs -t`.
+You can see now the back-end application visiting https://secure-ridge-67129.herokuapp.com/api/notes 
+
