@@ -4,7 +4,7 @@ To build and copy the React frontend part2 to the backend part3 folder, and then
 
 ### npm run deploy:full 
 
-To see the application in running on Heroku visit:
+To see the application running on Heroku visit:
 
 ### https://secure-ridge-67129.herokuapp.com/ 
 
