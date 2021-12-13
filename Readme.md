@@ -1,10 +1,10 @@
-# Deploy and see the app with Heroku
+# Deploy the app with Heroku
 
 To build and copy the React frontend part2 to the backend part3 folder, and then to commit and push all the app to the repository on github and to deploy on Heroku run (see 'deploy:full' in *package.json* for the full command):
 
 ### npm run deploy:full 
 
-To see the application in running on Heroku visit:
+To see the application running on Heroku visit:
 
 ### https://secure-ridge-67129.herokuapp.com/ 
 
