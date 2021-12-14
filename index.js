@@ -73,7 +73,7 @@ app.get('/api/notes', (request, response) => {
     })
 })
 
-app.get('/api/notes/:id', (request, response) => {
+app.get('/api/notes/:id', (request, response, next) => {
     // const id = Number(request.params.id)
     // //console.log('id:',id);
     // //console.log('notes:',notes);
@@ -88,18 +88,37 @@ app.get('/api/notes/:id', (request, response) => {
     // }
 
     // with mongodb
-    Note.findById(request.params.id).then(note => {
-        response.json(note)
-    })
-    
+    Note.findById(request.params.id)
+        .then(note => {
+            if (note) {
+                response.json(note)
+            } else {
+                response.status(404).end()
+            }
+        })
+        // .catch(error => {
+        //     console.log('Error:', error)
+        //     response.status(400).send({ error: 'malformed id' })
+        // })
+        // If the next function is called with a parameter, then the execution will continue
+        // to the error handler middleware
+        .catch(error => next(error))    
+        // If next was called without a parameter, then the execution would simply move onto 
+        // the next route or middleware. 
 })
 
 app.delete('/api/notes/:id', (request, response) => {
-    const id = Number(request.params.id)
-    notes = notes.filter(note => note.id !== id)
+    // const id = Number(request.params.id)
+    // notes = notes.filter(note => note.id !== id)
     //console.log('notes:',notes);
+    // response.status(204).end()
 
-    response.status(204).end()
+    // with mongodb and mongoose
+    Note.findByIdAndRemove(request.params.id)
+        .then(result => {
+            response.status(204).end()
+        })
+        .catch(error => next(error))
 })
 
 const generateId = () => {
@@ -133,11 +152,38 @@ app.post('/api/notes', (request, response) => {
     // response.json(note)
 })
 
+app.put('/api/notes/:id', (request, response, next) => {
+    const body = request.body
+
+    const note = {
+        content: body.content,
+        important: body.important
+    }
+
+    Note.findByIdAndUpdate(request.params.id, note, { new: true })
+        .then(updatedNote => {
+            response.json(updatedNote)
+        })
+        .catch(error => next(error))
+})
+
 // another middleware after the routes that handle call to a different endpoint
 const unknownEndpoint = (request, response) => {
     response.status(404).send({ error: 'unknown endpoint'})
 }
 app.use(unknownEndpoint)
+
+const errorHandler = (error, request, response, next) => {
+    console.error(error.message)
+
+    if (error.name === 'CastError') {
+        return response.status(400).send({ error: 'malfomed id'})
+    }
+
+    next(error)
+}
+// this has to be the last loaded middleware
+app.use(errorHandler)
 
 // const PORT = process.env.PORT || 3001
 const PORT = process.env.PORT

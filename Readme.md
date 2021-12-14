@@ -22,6 +22,10 @@ To login to the mongodb database
 
 # Watch the app locally (dev)
 
+To deploy the UI (a React frontend application developed in part 2) run:
+
+### npm run build:ui
+
 We can run locally the program directly with Node from the command line:
 
 ### node index.js
@@ -33,7 +37,12 @@ Or we can run it as an npm script:
 ### npm start
 
 We can now open locally our application in the browser by visiting the address 
-http://localhost:3001
+
+### http://localhost:3001
+
+To check other endpoints from backend and db visit (or rather open Insomnia):
+http://localhost:3001/api/notes <br>
+http://localhost:3001/api/notes/61b75f9ea298f022768cfbbe
 
 We can also start our application with nodemon like this:
 
