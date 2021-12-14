@@ -1,8 +1,12 @@
-# Deploy and see the app with Heroku (production)
+# Deploy with Heroku (production)
 
 To build and copy the React frontend part2 to the backend part3 folder, and then to commit and push all the app to the repository on github and to deploy on Heroku run (see 'deploy:full' in *package.json* for the full command):
 
 ### npm run deploy:full 
+
+We defined the environment variables for development in file .env, but the environment variable that defines the database URL in production should be set to Heroku with the heroku config:set command.
+
+### heroku config:set MONGODB_URI='mongodb+srv://fullstack:secretpasswordhere@cluster0.ck2n2.mongodb.net/note-app?retryWrites=true&w=majority'
 
 To see the application running on Heroku visit:
 

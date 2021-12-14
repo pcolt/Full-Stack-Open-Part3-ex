@@ -126,7 +126,7 @@ const generateId = () => {
     return maxId + 1
 }
 
-app.post('/api/notes', (request, response) => {
+app.post('/api/notes', (request, response, next) => {
     const body = request.body
     //console.log('note:',note);
 
@@ -145,9 +145,11 @@ app.post('/api/notes', (request, response) => {
 
     // notes = notes.concat(note)
     //console.log('notes:',notes);
-    note.save().then(savedNote => {
-        response.json(savedNote)
-    })
+    note.save()
+        .then(savedNote => {
+            response.json(savedNote)
+        })
+        .catch(error => next(error))
 
     // response.json(note)
 })
@@ -178,6 +180,8 @@ const errorHandler = (error, request, response, next) => {
 
     if (error.name === 'CastError') {
         return response.status(400).send({ error: 'malfomed id'})
+    } else if (error.name === 'ValidationError') {
+        return response.status(400).json({error: error.message})
     }
 
     next(error)
