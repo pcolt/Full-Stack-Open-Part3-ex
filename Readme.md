@@ -4,9 +4,9 @@ To build and copy the React frontend part2 to the backend part3 folder, and then
 
 ### npm run deploy:full 
 
-We defined the environment variables for development in file .env, but the environment variable that defines the database URL in production should be set to Heroku with the heroku config:set command.
+We defined the environment variables for development in file .env, but the environment variable that defines the database URL in production should be set to Heroku with the heroku config:set command:
 
-### heroku config:set MONGODB_URI='mongodb+srv://fullstack:secretpasswordhere@cluster0.ck2n2.mongodb.net/note-app?retryWrites=true&w=majority'
+#### `heroku config:set MONGODB_URI='mongodb+srv://fullstack:secretpasswordhere@cluster0.ck2n2.mongodb.net/note-app?retryWrites=true&w=majority'`
 
 To see the application running on Heroku visit:
 
@@ -44,7 +44,7 @@ We can now open locally our application in the browser by visiting the address
 
 ### http://localhost:3001
 
-To check other endpoints from backend and db visit (or rather open Insomnia):
+To check other endpoints from backend and db visit (or rather open Insomnia):<br>
 http://localhost:3001/api/notes <br>
 http://localhost:3001/api/notes/61b75f9ea298f022768cfbbe
 
@@ -58,10 +58,9 @@ These development dependencies are not needed when the application is run in pro
 
 # Other notes
 
-You can start the interactive node-repl by typing in 
-`node` 
-in the command line
+You can start the interactive node-repl by typing in the command line:
+### node 
 
 If we start working on the project on another computer, we can install all up-to-date dependencies (node_modules folder is marked by .gitignore) of the project defined in package.json with the command:
-`npm install`
+### npm install
 
