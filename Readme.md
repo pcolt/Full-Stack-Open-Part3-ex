@@ -1,3 +1,5 @@
+From Helsinki University's [FullStackOpen Part 3](https://fullstackopen.com/en/part3) : Experimenting with Node and Express writing a server that will be connected to the React app developed in Part2 
+
 # Deploy with Heroku (production)
 
 To build and copy the React frontend part2 to the backend part3 folder, and then to commit and push all the app to the repository on github and to deploy on Heroku run (see 'deploy:full' in *package.json* for the full command):
