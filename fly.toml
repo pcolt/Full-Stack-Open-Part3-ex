@@ -1,0 +1,20 @@
+# fly.toml app configuration file generated for fulstackopen-part-3-2 on 2023-09-14T16:10:58+02:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "fulstackopen-part-3-2"
+primary_region = "cdg"
+
+[build]
+
+[env]
+  PORT = "3000"
+
+[http_service]
+  internal_port = 3000
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ["app"]
